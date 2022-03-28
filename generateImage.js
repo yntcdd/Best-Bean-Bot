@@ -19,7 +19,7 @@ const generateImage = async (member) => {
   let username = member.user.username;
   let discrim = member.user.discriminator;
   let avatarURL = member.user.displayAvatarURL({
-    format: "jpg",
+    format: "png",
     dynamic: false,
     size: av.size,
   });
@@ -44,7 +44,14 @@ const generateImage = async (member) => {
   ctx.save();
 
   ctx.beginPath();
-  ctx.arc(av.x + av.size / 2, av.y + av.size / 2, av.size / 2, 0, Math.PI * 2);
+  ctx.arc(
+    av.x + av.size / 2,
+    av.y + av.size / 2,
+    av.size / 2,
+    0,
+    Math.PI * 2,
+    true
+  );
   ctx.closePath();
   ctx.clip();
 
@@ -73,7 +80,7 @@ const generateImage = async (member) => {
 
   const attachment = new Discord.MessageAttachment(
     canvas.toBuffer(),
-    "welcome.jpg"
+    "welcome.png"
   );
   return attachment;
 };

@@ -13,6 +13,16 @@ let bot = {
   owners: ["767862326862020689"],
 };
 
+const welcomeChannelId = "956635923490144406";
+
+client.on("guildMemberAdd", async (member) => {
+  const img = await generateImage(member);
+  member.guild.channels.cache.get(welcomeChannelId).send({
+    content: `<@${member.id}> Welcome to the server!`,
+    files: [img],
+  });
+});
+
 client.slashcommands = new Discord.Collection();
 
 client.commands = new Discord.Collection();
@@ -30,16 +40,6 @@ client.loadEvents(bot, false);
 client.loadCommands(bot, false);
 
 module.exports = bot;
-
-const welcomeChannelId = "926530810008453120";
-
-client.on("guildMemberAdd", async (member) => {
-  const img = await generateImage(member);
-  member.guild.channels.cache.get(welcomeChannelId).send({
-    content: `<@${member.id}> Welcome to the server!`,
-    files: [img],
-  });
-});
 
 client.on("interactionCreate", (interaction) => {
   if (!interaction.isCommand()) return;

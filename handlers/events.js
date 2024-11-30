@@ -26,7 +26,7 @@ function triggerEventHandler(bot, event, ...args) {
   try {
     if (client.events.has(event)) client.events.get(event).run(bot, ...args);
     else throw new Error(`Event ${event} does not exist`);
-  } catch (err) {
+  } catch (err) {3
     console.error(err);
   }
 }
@@ -40,5 +40,9 @@ function initEvents(bot) {
 
   client.on("messageCreate", (message) => {
     triggerEventHandler(bot, "messageCreate", message);
+  });
+
+  client.on("interactionCreate", (interaction) => {
+    triggerEventHandler(bot, "interactionCreate", interaction);
   });
 }

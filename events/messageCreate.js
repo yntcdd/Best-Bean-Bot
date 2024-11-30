@@ -22,7 +22,6 @@ module.exports = {
     if (command.devOnly && !owners.includes(member.id)) {
       return message.reply("This command is only available to the bot owners");
     }
-
     if (
       command.permissions &&
       member.permissions.missing(command.permissions).length !== 0
